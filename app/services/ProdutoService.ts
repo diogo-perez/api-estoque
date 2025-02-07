@@ -7,11 +7,11 @@ export default class ProdutoService {
       let query = Produto.query()
 
       if (unidade) {
-        query = query.where('unidade_id', unidade)
+        query = query.where('unidade_id', unidade).where('is_ativo', true)
       }
 
       if (categoria) {
-        query = query.where('categoria_id', categoria)
+        query = query.where('categoria_id', categoria).where('is_ativo', true)
       }
 
       const info = await query.exec()

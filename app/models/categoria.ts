@@ -13,6 +13,9 @@ export default class Categoria extends BaseModel {
   @column()
   declare unidadeId: number
 
+  @column()
+  declare isAtivo: boolean
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

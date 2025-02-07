@@ -10,6 +10,9 @@ export default class Unidade extends BaseModel {
   @column()
   declare nome: string
 
+  @column()
+  declare isAtivo: boolean
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

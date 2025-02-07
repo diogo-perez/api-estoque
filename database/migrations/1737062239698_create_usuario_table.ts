@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.string('senha').notNullable()
       table.enum('tipo', [1, 2, 3, 4, 5, 6]).notNullable()
       table.specificType('unidade_id', 'integer[]')
+      table.boolean('is_ativo').notNullable().defaultTo(true)
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

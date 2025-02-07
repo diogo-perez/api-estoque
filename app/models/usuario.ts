@@ -24,6 +24,9 @@ export default class Usuario extends BaseModel {
   @column()
   declare unidadeId: number[] | null
 
+  @column()
+  declare isAtivo: boolean
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

@@ -4,7 +4,7 @@ import { UnidadeInterface } from 'app/interfaces/UnidadeInterface.js'
 export default class UnidadeService {
   public async listarUnidades() {
     try {
-      let query = Unidade.query()
+      let query = Unidade.query().where('is_ativo', true)
 
       const info = await query.exec()
       return {
@@ -48,10 +48,11 @@ export default class UnidadeService {
   public async deletarUnidade(id: number) {
     try {
       const unidade = await Unidade.findOrFail(id)
-      await unidade.delete()
+      unidade.isAtivo = false
+      unidade.save()
       return {
         status: true,
-        message: `Registro excluído com sucesso`,
+        message: `Registro inativo com sucesso`,
         data: null,
       }
     } catch (error) {

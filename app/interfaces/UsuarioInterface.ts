@@ -5,4 +5,5 @@ export interface UsuarioInterface {
   senha?: string
   tipo?: number
   unidadeId?: number[] | null
+  isAtivo?: boolean
 }

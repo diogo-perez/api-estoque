@@ -43,7 +43,7 @@ export default class UsuarioService {
       let query = Usuario.query()
 
       if (unidade) {
-        query = query.whereRaw('?? @> ?', ['unidade_id', [unidade]])
+        query = query.whereRaw('?? @> ?', ['unidade_id', [unidade]]).where('is_ativo', true)
       }
 
       const info = await query.exec()
@@ -101,10 +101,11 @@ export default class UsuarioService {
   public async deletarUsuario(id: number) {
     try {
       const usuario = await Usuario.findOrFail(id)
-      await usuario.delete()
+      usuario.isAtivo = false
+      usuario.save()
       return {
         status: true,
-        message: `Registro excluído com sucesso`,
+        message: `Registro inativo com sucesso`,
         data: null,
       }
     } catch (error) {

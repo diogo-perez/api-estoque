@@ -7,7 +7,7 @@ export default class CategoriaService {
       let query = Categoria.query()
 
       if (unidade) {
-        query = query.where('unidade_id', unidade)
+        query = query.where('unidade_id', unidade).where('is_ativo', true)
       }
 
       const info = await query.exec()
@@ -52,10 +52,11 @@ export default class CategoriaService {
   public async deletarCategoria(id: number) {
     try {
       const categoria = await Categoria.findOrFail(id)
-      await categoria.delete()
+      categoria.isAtivo = false
+      categoria.save()
       return {
         status: true,
-        message: `Registro excluído com sucesso`,
+        message: `Registro inativo com sucesso`,
         data: null,
       }
     } catch (error) {

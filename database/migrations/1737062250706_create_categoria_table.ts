@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('nome').notNullable()
       table.integer('unidade_id').notNullable().unsigned().references('id').inTable('unidade')
+      table.boolean('is_ativo').notNullable().defaultTo(true)
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
