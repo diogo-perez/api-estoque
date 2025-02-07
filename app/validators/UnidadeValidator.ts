@@ -9,5 +9,6 @@ export const unidadeCreateValidator = vine.compile(
 export const unidadeUpdateValidator = vine.compile(
   vine.object({
     nome: vine.string().minLength(3).maxLength(255).optional(),
+    isAtivo: vine.boolean().optional(),
   })
 )

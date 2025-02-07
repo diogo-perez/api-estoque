@@ -61,6 +61,7 @@ export const usuarioUpdateValidator = vine.compile(
       )
       .nullable()
       .optional(),
+    isAtivo: vine.boolean().optional(),
   })
 )
 
