@@ -5,7 +5,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class UnidadeController {
   private unidadeService = new UnidadeService()
 
-  public async listar({ request, response }: HttpContext) {
+  public async listar({ response }: HttpContext) {
     const result = await this.unidadeService.listarUnidades()
     return response.status(200).send({
       status: true,
