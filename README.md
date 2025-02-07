@@ -21,19 +21,37 @@ Antes de rodar a aplicação, você precisa ter o [Node.js](https://nodejs.org/)
 ## Instalação
 
 1. Clone o repositório:
+
    ```bash
    git clone https://github.com/matheuscimatti/api-estoque.git
    cd api-estoque
+   ```
+
 2. Instale as dependências:
+
    ```bash
    npm install
-3. Configure o arquivo .env com as informações do seu banco. Use o arquivo .env.example como base.
+   ```
+
+3. Configure o arquivo `.env` com as informações do seu banco. Use o arquivo `.env.example` como base.
+
 4. Execute as migrações para criar as tabelas no banco de dados:
+
    ```bash
    node ace migration:run
-5. Inicie a API
+   ```
+
+5. Execute os seeders para popular o banco de dados com dados iniciais:
+
+   ```bash
+   node ace db:seed
+   ```
+
+6. Inicie a API:
    ```bash
    npm run dev
-A API estará disponível em ```http://localhost:3333```
+   ```
 
-Para testar a API você pode importar a collection no postman com o arquivo ```Estoque API.postman_collection.json```
+A API estará disponível em `http://localhost:3333`
+
+Para testar a API você pode importar a collection no Postman com o arquivo `Estoque API.postman_collection.json`.
