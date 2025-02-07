@@ -6,7 +6,7 @@ export default class extends BaseSeeder {
     await Usuario.createMany([
       {
         nome: 'Mateus Pitta',
-        cpf: '067.773.031-46',
+        cpf: '06777303146',
         senha: '067773',
         tipo: 6,
         unidadeId: [1],
