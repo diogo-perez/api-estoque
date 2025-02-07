@@ -1,0 +1,1376 @@
+{
+	"info": {
+		"_postman_id": "fd1596d7-db39-4b34-8512-9bd54bd75477",
+		"name": "Estoque API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28308421"
+	},
+	"item": [
+		{
+			"name": "Estoque",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/estoque",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"estoque"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Recursos Humanos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/estoque",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"estoque"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Tecnologia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/estoque/1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"estoque",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/estoque/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"estoque",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{_.TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/usuario",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste\",\r\n    \"cpf\": \"712.150.430-82\",\r\n    \"senha\": \"123456\",\r\n    \"tipo\": 1,\r\n    \"estoqueId\": [1]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/usuario",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/usuario/1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste\",\r\n    \"cpf\": \"74803125040\",\r\n    \"senha\": \"123456\",\r\n    \"tipo\": 3,\r\n    \"estoqueId\": [2]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/usuario/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/usuario/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{_.TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Cidade",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/cidade",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"cidade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Caarapo\",\r\n    \"uf\": \"MS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/cidade",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"cidade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Sorocaba\",\r\n    \"uf\": \"SP\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/cidade/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"cidade",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/cidade/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"cidade",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{_.TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Unidade",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/unidade?cidade=3",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"unidade"
+							],
+							"query": [
+								{
+									"key": "cidade",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste\",\r\n    \"cnpj\": \"35.084.946/0001-68\",\r\n    \"telefone\": \"(67) 9 9999-9999\",\r\n    \"endereco\": \"Rua do Teste, 123\",\r\n    \"cidadeId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/unidade",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"unidade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste2\",\r\n    \"cnpj\": \"58576435000169\",\r\n    \"cidadeId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/unidade/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"unidade",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/unidade/1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"unidade",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{_.TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Setor",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/setor?unidade=1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"setor"
+							],
+							"query": [
+								{
+									"key": "unidade",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste\",\r\n    \"unidadeId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/setor",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"setor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste2\",\r\n    \"unidadeId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/setor/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"setor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/setor/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"setor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{_.TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Categoria",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/categoria?estoque=2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"categoria"
+							],
+							"query": [
+								{
+									"key": "estoque",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste\",\r\n    \"estoqueId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/categoria",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"categoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste2\",\r\n    \"estoqueId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/categoria/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"categoria",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/categoria/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"categoria",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{_.TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Fornecedor",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/fornecedor?estoque=2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"fornecedor"
+							],
+							"query": [
+								{
+									"key": "estoque",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste\",\r\n    \"cnpj\": \"78.910.229/0001-50\",\r\n    \"telefone\": \"(67) 9 9999-9999\",\r\n    \"estoqueId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/fornecedor",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"fornecedor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste2\",\r\n    \"estoqueId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/fornecedor/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"fornecedor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/fornecedor/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"fornecedor",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{_.TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Produto",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/produto?estoque=1&categoria=1&fornecedor=1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"produto"
+							],
+							"query": [
+								{
+									"key": "estoque",
+									"value": "1"
+								},
+								{
+									"key": "categoria",
+									"value": "1"
+								},
+								{
+									"key": "fornecedor",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste\",\r\n    \"quantidade\": 1.00,\r\n    \"unidadeMedida\": \"litros\",\r\n    \"fornecedorId\": 1,\r\n    \"categoriaId\": 1,\r\n    \"estoqueId\": 1,\r\n    \"qtdMin\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/produto",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"produto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/produto/1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"produto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste2\",\r\n    \"quantidade\": 10,\r\n    \"unidadeMedida\": \"unidade\",\r\n    \"fornecedorId\": 1,\r\n    \"categoriaId\": 1,\r\n    \"estoqueId\": 1,\r\n    \"qtdMin\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/produto/1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"produto",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/produto/2",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"produto",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{_.TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Entrada",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/entrada?estoque=1&usuario=1&produto=1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"entrada"
+							],
+							"query": [
+								{
+									"key": "estoque",
+									"value": "1"
+								},
+								{
+									"key": "usuario",
+									"value": "1"
+								},
+								{
+									"key": "produto",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": \"2025-01-25\",\r\n    \"produtoId\": 1,\r\n    \"quantidade\": 10,\r\n    \"usuarioId\": 1,\r\n    \"estoqueId\": 1,\r\n    \"observacao\": \"Compra de 10 produtos.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/entrada",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"entrada"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/entrada/1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"entrada",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{_.TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Saida",
+			"item": [
+				{
+					"name": "Listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/saida?estoque=1&usuario=1&produto=1&unidade=1&setor=1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"saida"
+							],
+							"query": [
+								{
+									"key": "estoque",
+									"value": "1"
+								},
+								{
+									"key": "usuario",
+									"value": "1"
+								},
+								{
+									"key": "produto",
+									"value": "1"
+								},
+								{
+									"key": "unidade",
+									"value": "1"
+								},
+								{
+									"key": "setor",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"data\": \"2025-01-25\",\r\n    \"produtoId\": 1,\r\n    \"quantidade\": 23,\r\n    \"usuarioId\": 1,\r\n    \"estoqueId\": 1,\r\n    \"unidadeId\": 1,\r\n    \"setorId\": 1,\r\n    \"retiradoPor\": \"José Maria da Silva\",\r\n    \"observacao\": \"Teste.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{_.URL}}/saida",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"saida"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{_.URL}}/saida/1",
+							"host": [
+								"{{_.URL}}"
+							],
+							"path": [
+								"saida",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{_.TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cpf\": \"712.150.430-82\",\r\n    \"senha\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{_.URL}}/login",
+					"host": [
+						"{{_.URL}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "_.URL",
+			"value": "localhost:3333/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "_.TOKEN",
+			"value": "oat_MQ.Z3F1VVBicWhJZ0tqZENZcEdOcG45M0RTdlZ6SGZWNXg5VDB6VmFETzgzMjUyMzE2OQ",
+			"type": "string"
+		}
+	]
+}
