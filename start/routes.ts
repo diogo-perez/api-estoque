@@ -10,7 +10,6 @@ router
   .group(() => {
     // Rota para login
     router.post('login', [UsuarioController, 'login'])
-
     // Rotas para Usuário
     router
       .group(() => {
@@ -21,7 +20,7 @@ router
         router.delete('/:id', [UsuarioController, 'deletar']).where('id', router.matchers.number())
       })
       .prefix('usuario')
-    //.use(middleware.auth())
+      .use(middleware.auth())
 
     // Rotas para Unidade
     router
@@ -32,7 +31,7 @@ router
         router.delete('/:id', [UnidadeController, 'deletar']).where('id', router.matchers.number())
       })
       .prefix('unidade')
-    //.use(middleware.auth())
+      .use(middleware.auth())
 
     // Rotas para Categoria
     router
@@ -45,7 +44,7 @@ router
           .where('id', router.matchers.number())
       })
       .prefix('categoria')
-    //.use(middleware.auth())
+      .use(middleware.auth())
 
     // Rotas para Produto
     router
