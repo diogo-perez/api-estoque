@@ -4,6 +4,8 @@ build
 tmp
 
 # Secrets
+.env
+.env.example
 .env.local
 .env.production.local
 .env.development.local
