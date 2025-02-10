@@ -28,7 +28,7 @@ export default class ProdutoService {
   public async criarProduto(dados: ProdutoInterface) {
     try {
       let valorFinal = dados.valorReajuste ?? dados.valor ?? 0
-      let valorPorcao = dados.rendimento * valorFinal
+      let valorPorcao = valorFinal / dados.rendimento
       const info = await Produto.create({ ...dados, valorPorcao })
 
       return {
