@@ -1,5 +1,6 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import DashboardController from '#controllers/DashboardController'
 const UsuarioController = () => import('#controllers/UsuarioController')
 const UnidadeController = () => import('#controllers/UnidadeController')
 const CategoriaController = () => import('#controllers/CategoriaController')
@@ -8,9 +9,8 @@ const MovimentacaoController = () => import('#controllers/MovimentacaoController
 
 router
   .group(() => {
-    // Rota para login
     router.post('login', [UsuarioController, 'login'])
-    // Rotas para Usuário
+
     router
       .group(() => {
         router.get('/', [UsuarioController, 'listar'])
@@ -22,7 +22,6 @@ router
       .prefix('usuario')
       .use(middleware.auth())
 
-    // Rotas para Unidade
     router
       .group(() => {
         router.get('/', [UnidadeController, 'listar'])
@@ -33,7 +32,6 @@ router
       .prefix('unidade')
       .use(middleware.auth())
 
-    // Rotas para Categoria
     router
       .group(() => {
         router.get('/', [CategoriaController, 'listar'])
@@ -45,8 +43,6 @@ router
       })
       .prefix('categoria')
       .use(middleware.auth())
-
-    // Rotas para Produto
     router
       .group(() => {
         router.get('/', [ProdutoController, 'listar'])
@@ -58,7 +54,6 @@ router
       .prefix('produto')
       .use(middleware.auth())
 
-    // Rotas para Entrada
     router
       .group(() => {
         router.get('/', [MovimentacaoController, 'listarMovimentacao'])
@@ -68,6 +63,12 @@ router
           .where('id', router.matchers.number())
       })
       .prefix('movimentacao')
+      .use(middleware.auth())
+    router
+      .group(() => {
+        router.post('/', [DashboardController, 'mostrarDashboard'])
+      })
+      .prefix('dashboard')
       .use(middleware.auth())
   })
   .prefix('api/v1')

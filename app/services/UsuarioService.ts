@@ -1,10 +1,17 @@
 import NotFoundException from '#exceptions/notfound_exception'
 import Usuario from '#models/usuario'
 import hash from '@adonisjs/core/services/hash'
-import { UsuarioInterface } from '../interfaces/UsuarioInterface.js'
 import UnauthorizedException from '#exceptions/unauthorized_exception'
+import UnidadeService from './UnidadeService.js'
+import { UsuarioInterface } from 'app/interfaces/UsuarioInterface.js'
 
 export default class UsuarioService {
+  private unidadeService: UnidadeService
+
+  constructor() {
+    this.unidadeService = new UnidadeService()
+  }
+
   public async autenticar(cpf: string, senha: string) {
     try {
       const user = await Usuario.findByOrFail('cpf', cpf)
@@ -22,6 +29,24 @@ export default class UsuarioService {
 
       const token = await Usuario.accessTokens.create(user)
 
+      const result = await this.unidadeService.listarUnidades()
+
+      if (!result.status) {
+        throw new Error('Erro ao buscar informações das unidades')
+      }
+
+      const unidadesUsuario = result.data
+        .filter(
+          (unidade: any) =>
+            user.unidadeId?.includes(Number(unidade.id)) ||
+            user.unidadeId == null ||
+            (user.unidadeId?.length === 0 && unidade.tipo === 1)
+        )
+        .map((unidade: any) => ({
+          id: unidade.id,
+          nome: unidade.nome,
+        }))
+
       return {
         status: true,
         message: `Usuário autenticado com sucesso`,
@@ -29,7 +54,7 @@ export default class UsuarioService {
           id: user.id,
           nome: user.nome,
           tipo: user.tipo,
-          unidadeId: user.unidadeId,
+          unidade: unidadesUsuario,
           token: token.value!.release(),
         },
       }
