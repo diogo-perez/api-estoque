@@ -1,6 +1,7 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 import DashboardController from '#controllers/DashboardController'
+import RelatorioController from '#controllers/RelatorioController'
 const UsuarioController = () => import('#controllers/UsuarioController')
 const UnidadeController = () => import('#controllers/UnidadeController')
 const CategoriaController = () => import('#controllers/CategoriaController')
@@ -43,6 +44,7 @@ router
       })
       .prefix('categoria')
       .use(middleware.auth())
+
     router
       .group(() => {
         router.get('/', [ProdutoController, 'listar'])
@@ -64,6 +66,16 @@ router
       })
       .prefix('movimentacao')
       .use(middleware.auth())
+
+    router
+      .group(() => {
+        router
+          .get('disperdicio/:id', [RelatorioController, 'listarDisperdicio'])
+          .where('id', router.matchers.number())
+      })
+      .prefix('relatorio')
+      .use(middleware.auth())
+
     router
       .group(() => {
         router.post('/', [DashboardController, 'mostrarDashboard'])
