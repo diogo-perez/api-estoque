@@ -77,9 +77,9 @@ export default class MovimentacaoService {
         } else {
           qtdTotal -= dados.quantidade
         }
-        if (qtdTotal < qtdMin) {
-          throw new Error('Saida excede a quantidade minima do produto em estoque!')
-        }
+        // if (qtdTotal < qtdMin) { //15 < 5
+        //   throw new Error('Saida excede a quantidade minima do produto em estoque!')
+        // }
       }
       await this.produtoService.atualizarProduto(dados.produtoId, {
         quantidade: qtdTotal,
