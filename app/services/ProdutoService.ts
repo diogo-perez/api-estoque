@@ -1,8 +1,9 @@
+import Categoria from '#models/categoria'
 import Produto from '#models/produto'
 import { ProdutoInterface } from 'app/interfaces/ProdutoInterface.js'
 
 export default class ProdutoService {
-  public async listarProdutos(unidade?: number, categoria?: number) {
+  public async listarProdutos(unidade?: number, cat?: number) {
     try {
       let query = Produto.query()
 
@@ -10,15 +11,29 @@ export default class ProdutoService {
         query = query.where('unidade_id', unidade).where('is_ativo', true)
       }
 
-      if (categoria) {
-        query = query.where('categoria_id', categoria).where('is_ativo', true)
+      if (cat) {
+        query = query.where('categoria_id', cat).where('is_ativo', true)
       }
 
       const info = await query.exec()
+      const categorias = await Categoria.query().whereIn(
+        'id',
+        info.map((produto) => produto.categoriaId)
+      )
+      const categoriasMap = categorias.reduce(
+        (acc, categoria) => {
+          acc[categoria.id] = categoria.nome
+          return acc
+        },
+        {} as Record<number, string>
+      )
       return {
         status: true,
         message: `${info.length} registro(s) encontrado(s)`,
-        data: info,
+        data: info.map((produto) => ({
+          ...produto.serialize(),
+          categoriaNome: categoriasMap[produto.categoriaId] || 'Categoria não encontrada',
+        })),
       }
     } catch (error) {
       throw new Error(error.message, { cause: error })

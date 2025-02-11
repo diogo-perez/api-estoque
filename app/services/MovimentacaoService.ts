@@ -1,6 +1,8 @@
 import Movimentacao from '#models/movimentacao'
 import { MovimentacaoInterface } from 'app/interfaces/MovimentacaoInterface.js'
 import ProdutoService from './ProdutoService.js'
+import Produto from '#models/produto'
+import Categoria from '#models/categoria'
 
 export default class MovimentacaoService {
   private produtoService = new ProdutoService()
@@ -29,11 +31,29 @@ export default class MovimentacaoService {
         query = query.where('usuario_id', usuario)
       }
 
-      const info = await query.exec()
+      const movimentacoes = await query
+
+      const dados = await Promise.all(
+        movimentacoes.map(async (mov) => {
+          const produto = await Produto.find(mov.produtoId)
+          const categoria = produto ? await Categoria.find(produto.categoriaId) : null
+          return {
+            id: mov.id,
+            tipo: mov.movTipo,
+            produtoNome: produto?.nome || 'Produto não encontrado',
+            quantidade: mov.quantidade,
+            categoria_id: produto?.categoriaId,
+            categoriaNome: categoria?.nome || 'Categoria não encontrada',
+            precoPorcao: produto?.valorPorcao,
+            data: mov.data,
+          }
+        })
+      )
+
       return {
         status: true,
-        message: `${info.length} registro(s) encontrado(s)`,
-        data: info,
+        message: `${dados.length} registro(s) encontrado(s)`,
+        data: dados,
       }
     } catch (error) {
       throw new Error(error.message, { cause: error })

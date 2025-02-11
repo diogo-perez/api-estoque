@@ -846,7 +846,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"nome\": \"Carne Moida\",\r\n    \"qtdMin\":2,\r\n    \"quantidade\":6,\r\n    \"rendimento\":1000,\r\n    \"valor\":12,\r\n    \"unidadeMedida\":5,\r\n    \"unidadeId\":1,\r\n    \"categoriaId\":1\r\n}",
+							"raw": "{\r\n\t\"nome\": \"Carne Moida\",\r\n    \"qtdMin\":2,\r\n    \"quantidade\":0,\r\n    \"rendimento\":1000,\r\n    \"valor\":12,\r\n    \"unidadeMedida\":5,\r\n    \"unidadeId\":1,\r\n    \"categoriaId\":1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -908,7 +908,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n            \"id\": 1,\n            \"nome\": \"Bife\",\n            \"qtdMin\": 2,\n            \"rendimento\": 1000,\n            \"valorPorcao\": 12000,\n            \"valor\": 12,\n            \"valorReajuste\": 20,\n            \"dataReajuste\": \"2025-02-10\",\n            \"quantidade\": 0,\n            \"unidadeMedida\": \"1\",\n            \"categoriaId\": 1,\n            \"unidadeId\": 1\n        }",
+							"raw": " {\n            \"nome\": \"Patinho\",\n            \"qtdMin\": ,\n            \"rendimento\": 1000,\n            \"valorPorcao\": 12000,\n            \"valor\": 12,\n            \"valorReajuste\": 20,\n            \"dataReajuste\": \"2025-02-10\",\n            \"quantidade\": 0,\n            \"unidadeMedida\": \"1\",\n            \"categoriaId\": 1,\n            \"unidadeId\": 1\n        }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -916,13 +916,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/produto/1",
+							"raw": "{{base_url}}/produto/2",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"produto",
-								"1"
+								"2"
 							]
 						},
 						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
@@ -1032,7 +1032,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"data\":\"2025-02-06\",\r\n    \"movTipo\":2, //1 - Entrada, 2 - Saida e 3 - Desperdicio\r\n    \"quantidade\":1,\r\n    \"produtoId\":1,\r\n    \"observacao\":\"teste\"\r\n}",
+							"raw": "{\r\n    \"data\":\"2025-02-06\",\r\n    \"movTipo\":3, //1 - Entrada, 2 - Saida e 3 - Desperdicio\r\n    \"quantidade\":2,\r\n    \"produtoId\":2,\r\n    \"observacao\":\"teste\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1084,6 +1084,40 @@
 									"key": "unidade",
 									"value": "1"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Relatorio",
+			"item": [
+				{
+					"name": "Disperdicio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/relatorio/disperdicio/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"relatorio",
+								"disperdicio",
+								"1"
 							]
 						}
 					},
@@ -1149,7 +1183,7 @@
 		},
 		{
 			"key": "token",
-			"value": "oat_Mg.Sm53Wi1JSTBIOHhkb0RULTJEYkVRWkhpR1NxMDhZRGV6MWQ5bGl3bzQwMTMzOTM4ODA",
+			"value": "oat_Mw.YXVNRGVhcXl4bWJRQ3lkc2d1UWtpNFk3T1NPODhqc1R6UjJ4bkZiSjMxMDMzNzAwNDg",
 			"type": "string"
 		}
 	]
