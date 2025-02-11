@@ -10,7 +10,6 @@ export default class DashboardController {
     const result = await this.dashboardService.listar(unidade)
     return response.status(200).send({
       status: true,
-      message: result?.message,
       data: result?.data,
     })
   }

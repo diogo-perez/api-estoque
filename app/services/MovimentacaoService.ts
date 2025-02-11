@@ -11,7 +11,7 @@ export default class MovimentacaoService {
     usuario?: number
   ) {
     try {
-      let query = Movimentacao.query().where('is_ativo', true)
+      let query = Movimentacao.query()
 
       if (unidade) {
         query = query.where('unidade_id', unidade)
