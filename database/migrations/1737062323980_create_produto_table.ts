@@ -12,7 +12,7 @@ export default class extends BaseSchema {
       table.float('valor_porcao').notNullable()
       table.float('valor').notNullable()
       table.float('valor_reajuste')
-      table.float('data_reajuste')
+      table.timestamp('data_reajuste')
       table.float('quantidade').notNullable()
       table.enum('unidade_medida', [1, 2, 3, 4, 5]).notNullable()
       table.integer('categoria_id').notNullable().unsigned().references('id').inTable('categoria')

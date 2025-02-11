@@ -8,7 +8,10 @@ export const produtoCreateValidator = vine.compile(
     rendimento: vine.number(),
     valor: vine.number(),
     valorReajuste: vine.number().optional(),
-    dataReajuste: vine.string().optional(),
+    dataReajuste: vine
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/)
+      .optional(),
     unidadeMedida: vine.number(),
     categoriaId: vine.number().exists(async (db, value) => {
       const categoria = await db.from('public.categoria').where('id', value).first()
@@ -30,7 +33,10 @@ export const produtoUpdateValidator = vine.compile(
     rendimento: vine.number(),
     valor: vine.number(),
     valorReajuste: vine.number().optional(),
-    dataReajuste: vine.string().optional(),
+    dataReajuste: vine
+      .string()
+      .regex(/^\d{4}-\d{2}-\d{2}$/)
+      .optional(),
     unidadeMedida: vine.number(),
     categoriaId: vine.number().exists(async (db, value) => {
       const categoria = await db.from('public.categoria').where('id', value).first()
