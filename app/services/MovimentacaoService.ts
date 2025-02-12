@@ -45,6 +45,7 @@ export default class MovimentacaoService {
             categoria_id: produto?.categoriaId,
             categoriaNome: categoria?.nome || 'Categoria não encontrada',
             precoPorcao: produto?.valorPorcao,
+            observacao: mov.observacao,
             data: mov.data,
           }
         })
