@@ -63,7 +63,7 @@ export default class MovimentacaoService {
 
   public async criarMovimentacao(dados: MovimentacaoInterface, produto: any, usuarioId?: number) {
     try {
-      const qtdMin = produto?.data.qtdMin
+      const qtdMin = produto?.data.qtdMin // 2
 
       let qtdTotal = produto.data.quantidade
       if (dados.movTipo == 1) {
@@ -77,6 +77,9 @@ export default class MovimentacaoService {
           qtdTotal -= dados.quantidade * 1000
         } else {
           qtdTotal -= dados.quantidade
+        }
+        if (qtdTotal < 0) {
+          throw new Error('Saída excede a quantidade disponível em estoque!')
         }
         // if (qtdTotal < qtdMin) { //15 < 5
         //   throw new Error('Saida excede a quantidade minima do produto em estoque!')
