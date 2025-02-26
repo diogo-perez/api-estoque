@@ -63,7 +63,7 @@ export default class MovimentacaoService {
 
   public async criarMovimentacao(dados: MovimentacaoInterface, produto: any, usuarioId?: number) {
     try {
-      const qtdMin = produto?.data.qtdMin // 2
+      // const qtdMin = produto?.data.qtdMin // 2
 
       let qtdTotal = produto.data.quantidade
       if (dados.movTipo == 1) {
