@@ -2,6 +2,7 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 import DashboardController from '#controllers/DashboardController'
 import RelatorioController from '#controllers/RelatorioController'
+import FichaController from '#controllers/FichaController'
 const UsuarioController = () => import('#controllers/UsuarioController')
 const UnidadeController = () => import('#controllers/UnidadeController')
 const CategoriaController = () => import('#controllers/CategoriaController')
@@ -81,6 +82,14 @@ router
         router.post('/', [DashboardController, 'mostrarDashboard'])
       })
       .prefix('dashboard')
+      .use(middleware.auth())
+
+    router
+      .group(() => {
+        router.get('/', [FichaController, 'buscaFicha'])
+        router.post('/', [FichaController, 'criar'])
+      })
+      .prefix('ficha')
       .use(middleware.auth())
   })
   .prefix('api/v1')
