@@ -1,7 +1,4 @@
-import Ficha from '#models/ficha'
-import FichaItem from '#models/ficha_item'
 import FichaService from '#services/FichaService'
-import { fichaCreateValidator } from '#validators/FichaValidator'
 import type { HttpContext } from '@adonisjs/core/http'
 import { FichaInterface } from 'app/interfaces/FichaInterface.js'
 import { FichaItemInterface } from 'app/interfaces/FichaItemInterface.js'
