@@ -1,5 +1,6 @@
 import Ficha from '#models/ficha'
 import FichaItem from '#models/ficha_item'
+import Produto from '#models/produto'
 import { FichaInterface } from 'app/interfaces/FichaInterface.js'
 import { FichaItemInterface } from 'app/interfaces/FichaItemInterface.js'
 
@@ -14,20 +15,43 @@ export default class FichaService {
 
       const fichas = await query.exec()
 
+      // Busca os itens e carrega os produtos relacionados
       const fichaItens = await FichaItem.query().whereIn(
-        'ficha_id',
+        'prato_id',
         fichas.map((ficha) => ficha.id)
       )
 
+      const produtos = await Produto.query().whereIn(
+        'id',
+        fichaItens.map((item) => item.produtoId)
+      )
+      const produtosMap = produtos.reduce(
+        (acc, produto) => {
+          acc[produto.id] = produto.nome
+          return acc
+        },
+        {} as Record<number, string>
+      )
+
+      // Agrupar os itens da ficha pelo pratoId
       const fichaItensMap = fichaItens.reduce(
         (acc, item) => {
           if (!acc[item.pratoId]) {
             acc[item.pratoId] = []
           }
-          acc[item.pratoId].push(item)
+          acc[item.pratoId].push({
+            id: item.id,
+            qtdUtilizado: item.qtdUtilizado,
+            valorUtilizado: item.valorUtilizado,
+            produtoId: item.produtoId,
+            pratoId: item.pratoId,
+            createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
+            produtoNome: produtosMap[item.produtoId] || 'Produto não encontrada',
+          })
           return acc
         },
-        {} as Record<number, FichaItem[]>
+        {} as Record<number, any[]>
       )
 
       return {
@@ -35,7 +59,7 @@ export default class FichaService {
         message: `${fichas.length} registro(s) encontrado(s)`,
         data: fichas.map((ficha) => ({
           ...ficha.serialize(),
-          itens: fichaItensMap[ficha.id] || [],
+          produtos: fichaItensMap[ficha.id] || [],
         })),
       }
     } catch (error) {

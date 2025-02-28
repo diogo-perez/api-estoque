@@ -41,6 +41,6 @@ export default class Usuario extends BaseModel {
   }
 
   static accessTokens = DbAccessTokensProvider.forModel(Usuario, {
-    expiresIn: '50 mins',
+    expiresIn: '120 mins',
   })
 }
