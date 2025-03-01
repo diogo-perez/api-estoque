@@ -550,7 +550,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/categoria?unidade=2",
+							"raw": "{{base_url}}/categoria?unidade=1",
 							"host": [
 								"{{base_url}}"
 							],
@@ -560,7 +560,7 @@
 							"query": [
 								{
 									"key": "unidade",
-									"value": "2"
+									"value": "1"
 								}
 							]
 						},
@@ -610,7 +610,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"Bebida\",\n    \"unidadeId\":[2]\n}",
+							"raw": "{\n\t\"nome\": \"Carne\",\n    \"unidadeId\":[1]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -750,6 +750,308 @@
 			]
 		},
 		{
+			"name": "CMV",
+			"item": [
+				{
+					"name": "Get data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cmv?unidade_id=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cmv"
+							],
+							"query": [
+								{
+									"key": "unidade_id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Get data by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cmv/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cmv",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+					},
+					"response": []
+				},
+				{
+					"name": "Post data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"cmv\": {\n        \"unidadeId\": 1,\n  \"nome\":\"CMV Fevereiro\",\n  \"faturamento\":1000,\n  \"valorCMV\":32\n     },\n  \"produtos\": [\n    {\n      \"estoqueInicial\": 100,\n      \"valorInicial\": 500,\n      \"entrada\": 50,\n      \"valorEntrada\": 250,\n      \"estoqueFinal\": 150,\n      \"valorEstoqueFinal\": 750,\n      \"utilizado\": 30,\n      \"valorUtilizado\": 150,\n      \"produtoId\": 1\n    },\n    {\n      \"estoqueInicial\": 200,\n      \"valorInicial\": 1000,\n      \"entrada\": 30,\n      \"valorEntrada\": 150,\n      \"estoqueFinal\": 230,\n      \"valorEstoqueFinal\": 1150,\n      \"utilizado\": 40,\n      \"valorUtilizado\": 200,\n      \"produtoId\": 1\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cmv",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cmv"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Update data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful PUT request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"cmv\": {\n        \"unidadeId\": 1,\n  \"nome\":\"CMV Fevereiro\",\n  \"faturamento\":1000,\n  \"valorCMV\":32\n     },\n  \"produtos\": [\n    {\n      \"estoqueInicial\": 100,\n      \"valorInicial\": 500,\n      \"entrada\": 50,\n      \"valorEntrada\": 250,\n      \"estoqueFinal\": 150,\n      \"valorEstoqueFinal\": 750,\n      \"utilizado\": 30,\n      \"valorUtilizado\": 150,\n      \"produtoId\": 1\n    },\n    {\n      \"estoqueInicial\": 200,\n      \"valorInicial\": 1000,\n      \"entrada\": 30,\n      \"valorEntrada\": 150,\n      \"estoqueFinal\": 230,\n      \"valorEstoqueFinal\": 1150,\n      \"utilizado\": 40,\n      \"valorUtilizado\": 200,\n      \"produtoId\": 1\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/cmv/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cmv",
+								"1"
+							]
+						},
+						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DELETE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/cmv/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"cmv",
+								"1"
+							]
+						},
+						"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Produto",
 			"item": [
 				{
@@ -846,7 +1148,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"nome\": \"Carne Moida\",\r\n    \"qtdMin\":2,\r\n    \"quantidade\":0,\r\n    \"rendimento\":1000,\r\n    \"valor\":12,\r\n    \"unidadeMedida\":5,\r\n    \"unidadeId\":1,\r\n    \"categoriaId\":1\r\n}",
+							"raw": "{\r\n\t\"nome\": \"Patinho\",\r\n    \"qtdMin\":2,\r\n    \"quantidade\":5,\r\n    \"rendimento\":1000,\r\n    \"valor\":12,\r\n    \"unidadeMedida\":5,\r\n    \"unidadeId\":1,\r\n    \"categoriaId\":2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1004,12 +1306,18 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/movimentacao",
+							"raw": "{{base_url}}/movimentacao?unidade=2",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"movimentacao"
+							],
+							"query": [
+								{
+									"key": "unidade",
+									"value": "2"
+								}
 							]
 						}
 					},
@@ -1032,7 +1340,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"data\":\"2025-02-06\",\r\n    \"movTipo\":3, //1 - Entrada, 2 - Saida e 3 - Desperdicio\r\n    \"quantidade\":2,\r\n    \"produtoId\":2,\r\n    \"observacao\":\"teste\"\r\n}",
+							"raw": "{\r\n    \"data\":\"2025-02-26\",\r\n    \"movTipo\":2, //1 - Entrada, 2 - Saida e 3 - Desperdicio\r\n    \"quantidade\":2,\r\n    \"produtoId\":1,\r\n    \"observacao\":\"teste\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1126,6 +1434,140 @@
 			]
 		},
 		{
+			"name": "Ficha",
+			"item": [
+				{
+					"name": "Get data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ficha?unidade=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ficha"
+							],
+							"query": [
+								{
+									"key": "unidade",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"prato\": {\r\n    \"nome\": \"Prato de Exemplo\",\r\n    \"custoTotal\": 100.50,\r\n    \"qtdRendimento\": 10,\r\n    \"valorRendimento\": 10.00,\r\n    \"valorVenda\": 20.00,\r\n    \"cmvReal\": 80.00,\r\n    \"lucroReal\": 20.00\r\n  },\r\n  \"produtos\": [\r\n    {\r\n      \"qtdUtilizado\": 2,\r\n      \"valorUtilizado\": 10.00,\r\n      \"produtoId\": 1\r\n    },\r\n    {\r\n      \"qtdUtilizado\": 1,\r\n      \"valorUtilizado\": 5.00,\r\n      \"produtoId\": 1\r\n    }\r\n  ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/ficha?unidade=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ficha"
+							],
+							"query": [
+								{
+									"key": "unidade",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful DELETE request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/ficha/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"ficha",
+								"4"
+							]
+						},
+						"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "login",
 			"request": {
 				"method": "POST",
@@ -1183,7 +1625,7 @@
 		},
 		{
 			"key": "token",
-			"value": "oat_Mw.YXVNRGVhcXl4bWJRQ3lkc2d1UWtpNFk3T1NPODhqc1R6UjJ4bkZiSjMxMDMzNzAwNDg",
+			"value": "oat_NA.aXE5Yzd4NHhzY0NQQmFPcW9KQW42bFZDdE02VFRVMi1OX1otc25TYzk0MjI2NTY3OQ",
 			"type": "string"
 		}
 	]

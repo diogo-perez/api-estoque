@@ -10,7 +10,7 @@ export default class FichaService {
       let query = Ficha.query()
 
       if (unidade) {
-        query = query.where('unidade_id', unidade)
+        query = query.where('unidade_id', unidade).where('is_ativo', true)
       }
 
       const fichas = await query.exec()
@@ -105,6 +105,22 @@ export default class FichaService {
         message: 'Erro interno do servidor',
         errors: error.message,
       }
+    }
+  }
+
+  public async deletarFicha(id: number) {
+    try {
+      const ficha = await Ficha.findOrFail(id)
+      ficha.isAtivo = false
+      ficha.save()
+
+      return {
+        status: true,
+        message: `Ficha inativada com sucesso!`,
+        data: null,
+      }
+    } catch (error) {
+      throw new Error(error.message, { cause: error })
     }
   }
 }

@@ -1,38 +1,41 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class Ficha extends BaseModel {
-  static table = 'prato'
+export default class CMVItem extends BaseModel {
+  static table = 'cmv_itens'
 
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare nome: string
+  declare estoqueInicial: number
 
   @column()
-  declare custoTotal: number
+  declare valorInicial: number
 
   @column()
-  declare qtdRendimento: number
+  declare entrada: number
 
   @column()
-  declare valorRendimento: number
+  declare valorEntrada: number
 
   @column()
-  declare valorVenda: number
+  declare estoqueFinal: number
 
   @column()
-  declare cmvReal: number
+  declare valorEstoqueFinal: number
 
   @column()
-  declare lucroReal: number
+  declare utilizado: number
 
   @column()
-  declare unidadeId: number
+  declare valorUtilizado: number
 
   @column()
-  declare isAtivo: boolean
+  declare produtoId: number
+
+  @column()
+  declare cmvId: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

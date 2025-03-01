@@ -3,6 +3,7 @@ import { middleware } from './kernel.js'
 import DashboardController from '#controllers/DashboardController'
 import RelatorioController from '#controllers/RelatorioController'
 import FichaController from '#controllers/FichaController'
+import CMVController from '#controllers/CMVController'
 const UsuarioController = () => import('#controllers/UsuarioController')
 const UnidadeController = () => import('#controllers/UnidadeController')
 const CategoriaController = () => import('#controllers/CategoriaController')
@@ -88,8 +89,19 @@ router
       .group(() => {
         router.get('/', [FichaController, 'buscaFicha'])
         router.post('/', [FichaController, 'criar'])
+        router.delete('/:id', [FichaController, 'deletar']).where('id', router.matchers.number())
       })
       .prefix('ficha')
+      .use(middleware.auth())
+    router
+      .group(() => {
+        router.get('/', [CMVController, 'buscaCMV'])
+        router.post('/', [CMVController, 'criaCMV'])
+        router.get('/:id', [CMVController, 'mostrar']).where('id', router.matchers.number())
+        router.put('/:id', [CMVController, 'atualizar']).where('id', router.matchers.number())
+        router.delete('/:id', [CMVController, 'deletar']).where('id', router.matchers.number())
+      })
+      .prefix('cmv')
       .use(middleware.auth())
   })
   .prefix('api/v1')

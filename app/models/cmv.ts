@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class Ficha extends BaseModel {
-  static table = 'prato'
+export default class CMV extends BaseModel {
+  static table = 'cmv'
 
   @column({ isPrimary: true })
   declare id: number
@@ -11,22 +11,10 @@ export default class Ficha extends BaseModel {
   declare nome: string
 
   @column()
-  declare custoTotal: number
+  declare faturamento: number
 
   @column()
-  declare qtdRendimento: number
-
-  @column()
-  declare valorRendimento: number
-
-  @column()
-  declare valorVenda: number
-
-  @column()
-  declare cmvReal: number
-
-  @column()
-  declare lucroReal: number
+  declare valorCMV: number
 
   @column()
   declare unidadeId: number

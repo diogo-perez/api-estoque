@@ -52,4 +52,12 @@ export default class FichaController {
       data: result.data,
     })
   }
+  public async deletar({ params, response }: HttpContext) {
+    const result = await this.fichaService.deletarFicha(params.id)
+    return response.status(200).send({
+      status: true,
+      message: result.message,
+      data: result?.data,
+    })
+  }
 }
