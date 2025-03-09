@@ -8,7 +8,7 @@ export default class ProdutoService {
       let query = Produto.query()
 
       if (unidade) {
-        query = query.where('unidade_id', unidade).where('is_ativo', true)
+        query = query.where('unidade_id', unidade)
       }
 
       if (cat) {

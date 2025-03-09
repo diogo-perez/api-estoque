@@ -38,7 +38,7 @@ export default class DashboardService {
         data: {
           totalProduto: Number(qtdtotal),
           totalItens: qtdItens,
-          valorTotalItens,
+          valorTotalItens: Number(valorTotalItens).toFixed(2),
           produtosQtdMin: Number(produtosQtdMin),
         },
       }
