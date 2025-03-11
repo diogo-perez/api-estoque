@@ -90,16 +90,13 @@ export default class CMVService {
   static async mostrar(id: number) {
     try {
       const cmv = await CMV.findOrFail(id)
-
       // Buscar os itens de CMV associados
       const cmvItens = await CMVItem.query().where('cmvId', cmv.id)
-
       // Buscar os produtos associados aos itens
       const produtos = await Produto.query().whereIn(
         'id',
         cmvItens.map((item) => item.produtoId)
       )
-
       // Buscar as categorias dos produtos
       const categorias = await Categoria.query().whereIn(
         'id',
@@ -128,17 +125,33 @@ export default class CMVService {
         {} as Record<number, string>
       )
 
-      // Associar os produtos e categorias aos itens do CMV
-      const resultado = {
-        ...cmv,
-        itens: cmvItens.map((item) => ({
-          ...item,
-          produto: produtosMap[item.produtoId],
-          categoria: categoriasMap[produtosMap[item.produtoId].categoriaId],
-        })),
-      }
+      const itensFormatados = cmvItens.map((item) => ({
+        id: item.id,
+        estoqueInicial: item.estoqueInicial,
+        valorInicial: item.valorInicial,
+        entrada: item.entrada,
+        valorEntrada: item.valorEntrada,
+        estoqueFinal: item.estoqueFinal,
+        valorEstoqueFinal: item.valorEstoqueFinal,
+        utilizado: item.utilizado,
+        valorUtilizado: item.valorUtilizado,
+        produto: produtosMap[item.produtoId],
+        categoria: categoriasMap[produtosMap[item.produtoId].categoriaId],
+        createdAt: item.createdAt,
+        updatedAt: item.updatedAt,
+      }))
 
-      return resultado
+      return {
+        id: cmv.id,
+        nome: cmv.nome,
+        faturamento: cmv.faturamento,
+        valorCMV: cmv.valorCMV,
+        unidadeId: cmv.unidadeId,
+        isAtivo: cmv.isAtivo,
+        createdAt: cmv.createdAt,
+        updatedAt: cmv.updatedAt,
+        itens: itensFormatados,
+      }
     } catch (error) {
       throw new Error(error.message, { cause: error })
     }
