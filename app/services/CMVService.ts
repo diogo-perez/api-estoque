@@ -193,26 +193,55 @@ export default class CMVService {
     }
   }
 
-  static async atualizar(id: number, data: Partial<CMVInterface>) {
-    const cmv = await CMV.findOrFail(id)
+  static async atualizar(
+    id: number,
+    data: { cmv: Partial<CMVInterface>; produtos: CMVItemInterface[] }
+  ) {
+    try {
+      // Busca o registro existente
+      const cmv = await CMV.find(id)
+      if (!cmv) {
+        return {
+          status: false,
+          message: 'Registro não encontrado',
+        }
+      }
 
-    cmv.merge(data)
-    await cmv.save()
+      // Atualiza os dados da ficha principal
+      await cmv.merge(data.cmv).save()
 
-    // Atualizar os itens (cmv_item) associados, se necessário
-    if (data.cmv_item) {
-      // Apagar os itens antigos, se houver, e adicionar os novos
-      await CMVItem.query().where('cmvId', cmv.id).delete()
+      // Atualiza os itens associados
+      if (data.produtos && data.produtos.length > 0) {
+        await CMVItem.query().where('cmvId', id).delete() // Remove os itens antigos
 
-      await CMVItem.createMany(
-        data.cmv_item.map((item) => ({
-          ...item,
-          cmvId: cmv.id, // Associar o CMV ao item
+        const fichaItens = data.produtos.map((produto) => ({
+          estoqueInicial: produto.estoqueInicial,
+          valorInicial: produto.valorInicial,
+          entrada: produto.entrada,
+          valorEntrada: produto.valorEntrada,
+          estoqueFinal: produto.estoqueFinal,
+          valorEstoqueFinal: produto.valorEstoqueFinal,
+          utilizado: produto.utilizado,
+          valorUtilizado: produto.valorUtilizado,
+          produtoId: Number(produto.produtoId),
+          cmvId: id,
         }))
-      )
-    }
 
-    return cmv
+        await CMVItem.createMany(fichaItens)
+      }
+
+      return {
+        status: true,
+        message: 'Registro atualizado com sucesso',
+        data: cmv.toJSON(),
+      }
+    } catch (error) {
+      return {
+        status: false,
+        message: 'Erro ao atualizar registro',
+        errors: error.message,
+      }
+    }
   }
 
   static async inativar(id: number) {

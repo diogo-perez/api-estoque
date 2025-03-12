@@ -1,5 +1,4 @@
 import CMVService from '#services/CMVService'
-import { UpdateCMVValidator } from '#validators/CmvValidator'
 import type { HttpContext } from '@adonisjs/core/http'
 import { CMVInterface } from 'app/interfaces/CMVInterface.js'
 import { CMVItemInterface } from 'app/interfaces/CMVItemInterface.js'
@@ -27,12 +26,40 @@ export default class CMVController {
       .send({ status: true, message: 'CMV criado com sucesso', data: result.data })
   }
 
-  async atualizar({ params, request, response }: HttpContext) {
-    const payload = await request.validateUsing(UpdateCMVValidator)
-    const result = await CMVService.atualizar(params.id, payload)
-    return response
-      .status(200)
-      .send({ status: true, message: 'CMV atualizado com sucesso', data: result })
+  static async atualizar({ params, request, response }: HttpContext) {
+    try {
+      // Validação do payload
+      const payload = await request.all()
+
+      const data = {
+        cmv: {
+          nome: payload.nome,
+          faturamento: payload.faturamento,
+          valorCMV: payload.valorCMV,
+          isAtivo: payload.isAtivo,
+        },
+        produtos: payload.produtos ?? [],
+      }
+
+      // Chamada ao serviço para atualização
+      const result = await CMVService.atualizar(params.id, data)
+
+      if (!result.status) {
+        return response.status(400).send(result) // Se a atualização falhar, retorna erro
+      }
+
+      return response.status(200).send({
+        status: true,
+        message: 'CMV atualizado com sucesso',
+        data: result.data,
+      })
+    } catch (error) {
+      return response.status(500).send({
+        status: false,
+        message: 'Erro interno ao atualizar CMV',
+        errors: error.message || 'Erro desconhecido',
+      })
+    }
   }
 
   async deletar({ params, response }: HttpContext) {
