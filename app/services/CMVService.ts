@@ -36,13 +36,14 @@ export default class CMVService {
       const produtosMap = produtos.reduce(
         (acc, produto) => {
           acc[produto.id] = {
+            id: produto.id,
             nome: produto.nome,
             valor: produto.valor,
             categoriaId: produto.categoriaId,
           }
           return acc
         },
-        {} as Record<number, { nome: string; valor: number; categoriaId: number }>
+        {} as Record<number, { id: number; nome: string; valor: number; categoriaId: number }>
       )
 
       // Mapeamento das categorias por ID
