@@ -108,6 +108,50 @@ export default class FichaService {
     }
   }
 
+  public async atualizarFicha(
+    dados: { prato: FichaInterface; produtos: FichaItemInterface[] },
+    id: number
+  ) {
+    console.log(dados)
+    try {
+      // Busca a ficha existente pelo ID
+      const ficha = await Ficha.findOrFail(id)
+
+      // Atualiza a ficha com os novos dados
+      ficha.merge(dados.prato)
+      await ficha.save()
+
+      // Verifica se há produtos para atualizar
+      if (dados.produtos && dados.produtos.length > 0) {
+        // Exclui os itens antigos e adiciona os novos
+        await FichaItem.query().where('pratoId', id).delete()
+        console.log(dados)
+        const fichaItens = dados.produtos.map((produto) => ({
+          qtdUtilizado: produto.qtdUtilizado,
+          valorUtilizado: produto.valorUtilizado,
+          produtoId: Number(produto.produtoId),
+          pratoId: ficha.id,
+        }))
+
+        // Salva os novos itens
+        await FichaItem.createMany(fichaItens)
+      }
+
+      return {
+        status: true,
+        message: 'Registro atualizado com sucesso',
+        data: ficha.toJSON(),
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar ficha:', error)
+      return {
+        status: false,
+        message: 'Erro interno do servidor',
+        errors: error.message,
+      }
+    }
+  }
+
   public async deletarFicha(id: number) {
     try {
       const ficha = await Ficha.findOrFail(id)

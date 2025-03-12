@@ -52,6 +52,29 @@ export default class FichaController {
       data: result.data,
     })
   }
+
+  public async atualizar({ request, params, response }: HttpContext) {
+    // Captura os dados do corpo da requisição e força o tipo correto
+    const dados = request.all() as { prato: FichaInterface; produtos: FichaItemInterface[] }
+    // Verifica se os dados seguem o formato esperado
+    if (!dados.prato || !dados.produtos) {
+      return response.status(400).send({
+        status: false,
+        message:
+          'Formato do corpo da requisição inválido. Esperado { prato: {...}, produtos: [...] }',
+        data: null,
+      })
+    }
+
+    const result = await this.fichaService.atualizarFicha(dados, Number(params.id))
+
+    return response.status(200).send({
+      status: result.status,
+      message: result.message,
+      data: result.data,
+    })
+  }
+
   public async deletar({ params, response }: HttpContext) {
     const result = await this.fichaService.deletarFicha(params.id)
     return response.status(200).send({

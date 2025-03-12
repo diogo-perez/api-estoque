@@ -89,6 +89,7 @@ router
       .group(() => {
         router.get('/', [FichaController, 'buscaFicha'])
         router.post('/', [FichaController, 'criar'])
+        router.put('/:id', [FichaController, 'atualizar']).where('id', router.matchers.number())
         router.delete('/:id', [FichaController, 'deletar']).where('id', router.matchers.number())
       })
       .prefix('ficha')
