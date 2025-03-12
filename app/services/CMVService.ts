@@ -200,13 +200,14 @@ export default class CMVService {
     try {
       // Busca o registro existente
       const cmv = await CMV.find(id)
+
       if (!cmv) {
         return {
           status: false,
           message: 'Registro não encontrado',
         }
       }
-
+      console.log(data)
       // Atualiza os dados da ficha principal
       await cmv.merge(data.cmv).save()
 

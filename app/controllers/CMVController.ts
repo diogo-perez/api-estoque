@@ -30,13 +30,11 @@ export default class CMVController {
     try {
       // Validação do payload
       const payload = await request.all()
-
       const data = {
         cmv: {
-          nome: payload.nome,
-          faturamento: payload.faturamento,
-          valorCMV: payload.valorCMV,
-          isAtivo: payload.isAtivo,
+          nome: payload.cmv.nome,
+          faturamento: payload.cmv.faturamento,
+          valorCMV: payload.cmv.valorCMV,
         },
         produtos: payload.produtos ?? [],
       }
