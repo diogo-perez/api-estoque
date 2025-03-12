@@ -26,7 +26,7 @@ export default class CMVController {
       .send({ status: true, message: 'CMV criado com sucesso', data: result.data })
   }
 
-  static async atualizar({ params, request, response }: HttpContext) {
+  async atualizar({ params, request, response }: HttpContext) {
     try {
       // Validação do payload
       const payload = await request.all()
