@@ -49,7 +49,7 @@ export default class ProdutoController {
   public async deletar({ params, response }: HttpContext) {
     const result = await this.produtoService.deletarProduto(params.id)
     return response.status(200).send({
-      status: true,
+      status: result.status,
       message: result.message,
       data: result?.data,
     })

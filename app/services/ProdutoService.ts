@@ -90,11 +90,22 @@ export default class ProdutoService {
       await produto.delete()
       return {
         status: true,
-        message: `Registro excluído com sucesso`,
+        message: `Registro excluido com sucesso`,
         data: null,
       }
     } catch (error) {
-      throw new Error(error.message, { cause: error })
+      if (error.message.includes('violates foreign key constraint')) {
+        return {
+          status: false, // Aqui o status é alterado para false em caso de erro
+          message: 'Produto não pode ser inativado pois há registro de movimentação em seu código.',
+          errors: error.message,
+        }
+      }
+      return {
+        status: false, // Status false para outros tipos de erro também
+        message: 'Erro interno do servidor',
+        errors: error.message,
+      }
     }
   }
 }
