@@ -67,7 +67,7 @@ export default class CMVService {
           unidadeId: cmv.unidadeId,
           isAtivo: cmv.isAtivo,
           itens: cmvItensAssociados.map((item) => ({
-            id: item.id,
+            produtoId: item.produtoId,
             estoqueInicial: item.estoqueInicial,
             valorInicial: item.valorInicial,
             entrada: item.entrada,
