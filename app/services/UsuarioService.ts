@@ -1,4 +1,3 @@
-import NotFoundException from '#exceptions/notfound_exception'
 import Usuario from '#models/usuario'
 import hash from '@adonisjs/core/services/hash'
 import UnauthorizedException from '#exceptions/unauthorized_exception'
@@ -14,14 +13,16 @@ export default class UsuarioService {
 
   public async autenticar(cpf: string, senha: string) {
     try {
-      const user = await Usuario.findByOrFail('cpf', cpf)
+      const user = await Usuario.findBy('cpf', cpf)
 
       if (!user) {
-        throw new NotFoundException('Usuário não encontrado', {
-          code: 'E_ROW_NOT_FOUND',
-          status: 404,
-        })
+        throw new Error('Usuário não encontrado')
       }
+
+      if (!user.isAtivo) {
+        throw new Error('Usuário inativo. Contate o administrador.')
+      }
+
       const isValidPassword = await hash.verify(user.senha, senha)
 
       if (!isValidPassword)
@@ -59,7 +60,10 @@ export default class UsuarioService {
         },
       }
     } catch (error) {
-      throw new Error(error.message, { cause: error })
+      return {
+        status: false,
+        message: error.message,
+      }
     }
   }
 
@@ -126,11 +130,11 @@ export default class UsuarioService {
   public async deletarUsuario(id: number) {
     try {
       const usuario = await Usuario.findOrFail(id)
-      usuario.isAtivo = false
+      usuario.isAtivo = !usuario.isAtivo
       usuario.save()
       return {
         status: true,
-        message: `Registro inativo com sucesso`,
+        message: `Registro alterado com sucesso`,
         data: null,
       }
     } catch (error) {
