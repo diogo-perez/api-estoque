@@ -5,7 +5,7 @@ export default class extends BaseSeeder {
   async run() {
     await Unidade.createMany([
       {
-        nome: 'DOCE PRESENCA',
+        nome: 'VELAS MORIA',
       },
     ])
   }
