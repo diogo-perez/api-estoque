@@ -65,7 +65,7 @@ export default class UsuarioController {
   public async deletar({ params, response }: HttpContext) {
     const result = await this.usuarioService.deletarUsuario(params.id)
     return response.status(200).send({
-      status: true,
+      status: result.status,
       message: result.message,
       data: result?.data,
     })

@@ -131,10 +131,11 @@ export default class UsuarioService {
     try {
       const usuario = await Usuario.findOrFail(id)
       usuario.isAtivo = !usuario.isAtivo
+      console.log(usuario.isAtivo)
       usuario.save()
       return {
         status: true,
-        message: `Registro alterado com sucesso`,
+        message: `Usuário ${usuario.isAtivo == false ? 'inativado' : 'ativo'} com sucesso`,
         data: null,
       }
     } catch (error) {
