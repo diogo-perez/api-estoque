@@ -72,8 +72,13 @@ export default class ProdutoService {
   public async atualizarProduto(id: number, dados: any) {
     try {
       const produto = await Produto.findOrFail(id)
-      produto.merge(dados)
+      let valorFinal = dados.valorReajuste ?? dados.valor ?? produto.valor ?? 0
+      let valorPorcao = valorFinal / (dados.rendimento ?? produto.rendimento)
+
+      produto.merge({ ...dados, valorPorcao })
+
       await produto.save()
+
       return {
         status: true,
         message: 'Registro atualizado com sucesso',
