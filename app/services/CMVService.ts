@@ -247,9 +247,17 @@ export default class CMVService {
   }
 
   static async inativar(id: number) {
-    const cmv = await CMV.findOrFail(id)
-    cmv.isAtivo = false
-    await cmv.save()
-    return cmv
+    try {
+      const cmv = await CMV.findOrFail(id)
+      cmv.isAtivo = !cmv.isAtivo
+      await cmv.save()
+      return {
+        status: true,
+        message: `CMV ${cmv.isAtivo == false ? 'inativado' : 'ativo'} com sucesso`,
+        data: null,
+      }
+    } catch (error) {
+      throw new Error(error.message, { cause: error })
+    }
   }
 }

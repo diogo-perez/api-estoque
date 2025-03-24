@@ -131,7 +131,6 @@ export default class UsuarioService {
     try {
       const usuario = await Usuario.findOrFail(id)
       usuario.isAtivo = !usuario.isAtivo
-      console.log(usuario.isAtivo)
       usuario.save()
       return {
         status: true,

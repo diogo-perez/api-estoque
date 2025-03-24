@@ -42,7 +42,7 @@ export default class CategoriaController {
   public async deletar({ params, response }: HttpContext) {
     const result = await this.categoriaService.deletarCategoria(params.id)
     return response.status(200).send({
-      status: true,
+      status: result.status,
       message: result.message,
       data: result?.data,
     })

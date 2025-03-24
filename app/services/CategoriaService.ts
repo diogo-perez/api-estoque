@@ -1,4 +1,5 @@
 import Categoria from '#models/categoria'
+import Produto from '#models/produto'
 import { CategoriaInterface } from 'app/interfaces/CategoriaInterface.js'
 
 export default class CategoriaService {
@@ -52,11 +53,19 @@ export default class CategoriaService {
   public async deletarCategoria(id: number) {
     try {
       const categoria = await Categoria.findOrFail(id)
-      categoria.isAtivo = false
-      categoria.save()
+      const produtosVinculados = await Produto.query().where('categoria_id', id).count('* as total')
+      if (produtosVinculados[0].$extras.total > 0) {
+        return {
+          status: false,
+          message: 'Não é possível inativar a categoria, pois há produtos vinculados a ela.',
+          data: null,
+        }
+      }
+      categoria.isAtivo = !categoria.isAtivo
+      await categoria.save()
       return {
         status: true,
-        message: `Registro inativo com sucesso`,
+        message: `Categoria ${categoria.isAtivo == false ? 'inativada' : 'ativa'} com sucesso`,
         data: null,
       }
     } catch (error) {
