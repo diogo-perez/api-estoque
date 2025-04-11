@@ -65,7 +65,7 @@ router
         router
           .get('/:id', [MovimentacaoController, 'mostrarMovimentacao'])
           .where('id', router.matchers.number())
-        router.delete('/movimentacoes/:id', 'MovimentacaoController.excluirMovimentacao')
+        router.delete('/:id', 'MovimentacaoController.excluirMovimentacao')
       })
       .prefix('movimentacao')
       .use(middleware.auth())
