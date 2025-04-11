@@ -56,7 +56,7 @@ export default class MovimentacaoController {
       // 1. Buscar todas as movimentações do mesmo produto após a movimentação atual
       const posteriores = await Movimentacao.query()
         .where('produto_id', movimentacao.produtoId)
-        .andWhere('data', '>', String(movimentacao.data))
+        .andWhere('data', '>', new Date(movimentacao.data.toString()).toISOString())
         .orderBy('data', 'asc')
 
       // 2. Calcular o saldo resultante se essa movimentação for removida
