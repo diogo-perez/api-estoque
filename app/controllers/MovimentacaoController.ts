@@ -47,7 +47,8 @@ export default class MovimentacaoController {
     })
   }
 
-  public async excluirMovimentacao(id: number) {
+  public async excluirMovimentacao({ params }: HttpContext) {
+    const id = params.id
     try {
       const movimentacao = await Movimentacao.findOrFail(id)
       const produto = await Produto.findOrFail(movimentacao.produtoId)
