@@ -61,24 +61,37 @@ export default class MovimentacaoController {
 
       // 2. Calcular o saldo resultante se essa movimentação for removida
       let saldo = produto.quantidade
+      const movTipo = Number(movimentacao.movTipo)
 
       // Reverte o efeito da movimentação a ser excluída
       if ([1, 3].includes(produto.unidadeMedida)) {
-        if (movimentacao.movTipo === 1) saldo -= movimentacao.quantidade * 1000
-        else saldo += movimentacao.quantidade * 1000
+        if (movTipo === 1) {
+          saldo -= movimentacao.quantidade * 1000
+        } else {
+          saldo += movimentacao.quantidade * 1000
+        }
       } else {
-        if (movimentacao.movTipo === 1) saldo -= movimentacao.quantidade
-        else saldo += movimentacao.quantidade
+        if (movTipo === 1) {
+          saldo -= movimentacao.quantidade
+        } else {
+          saldo += movimentacao.quantidade
+        }
       }
 
       // 3. Simula as movimentações posteriores para verificar se o saldo é suficiente
       for (const mov of posteriores) {
         if ([1, 3].includes(produto.unidadeMedida)) {
-          if (mov.movTipo === 1) saldo += mov.quantidade * 1000
-          else saldo -= mov.quantidade * 1000
+          if (mov.movTipo === 1) {
+            saldo += mov.quantidade * 1000
+          } else {
+            saldo -= mov.quantidade * 1000
+          }
         } else {
-          if (mov.movTipo === 1) saldo += mov.quantidade
-          else saldo -= mov.quantidade
+          if (mov.movTipo === 1) {
+            saldo += mov.quantidade
+          } else {
+            saldo -= mov.quantidade
+          }
         }
 
         if (saldo < 0) {

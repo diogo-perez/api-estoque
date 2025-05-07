@@ -14,7 +14,6 @@ export default class DashboardService {
 
       // Soma total de itens no estoque
       const totalItensQuery = await query.clone().sum('quantidade as total')
-
       // Contagem de produtos com quantidade menor ou igual a qtd_min
       const produtosQtdMinQuery = await Produto.query()
         .whereRaw('quantidade <= qtd_min')
@@ -29,7 +28,7 @@ export default class DashboardService {
         return acc + produto.quantidade * produto.valor
       }, 0)
 
-      const qtdtotal = totalProdutosQuery[0].$extras.total
+      const qtdtotal = Number(totalProdutosQuery[0].$extras.total) || 0
       const qtdItens = totalItensQuery[0].$extras.total
       const produtosQtdMin = produtosQtdMinQuery[0].$extras.total || 0
 

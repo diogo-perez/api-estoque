@@ -19,7 +19,6 @@ export default class CMVService {
         'cmv_id',
         itens.map((ficha) => ficha.id)
       )
-      console.log(cmvItens)
       // Buscar os produtos associados aos itens
       const produtos = await Produto.query().whereIn(
         'id',
@@ -161,7 +160,6 @@ export default class CMVService {
   static async criar(data: { cmv: CMVInterface; produtos: CMVItemInterface[] }) {
     try {
       const cmv = await CMV.create(data.cmv)
-      console.log(cmv)
       // Adicionar os itens (cmv_item) associados ao CMV
       if (data.produtos && data.produtos.length > 0) {
         const fichaItens = data.produtos.map((produto) => ({
@@ -176,7 +174,6 @@ export default class CMVService {
           produtoId: Number(produto.produtoId),
           cmvId: cmv.id, // Associa o id da ficha com o pratoId do item
         }))
-        console.log(fichaItens)
         await CMVItem.createMany(fichaItens)
       }
 
@@ -208,7 +205,6 @@ export default class CMVService {
           message: 'Registro não encontrado',
         }
       }
-      console.log(data)
       // Atualiza os dados da ficha principal
       await cmv.merge(data.cmv).save()
 

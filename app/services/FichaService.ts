@@ -112,7 +112,6 @@ export default class FichaService {
     dados: { prato: FichaInterface; produtos: FichaItemInterface[] },
     id: number
   ) {
-    console.log(dados)
     try {
       // Busca a ficha existente pelo ID
       const ficha = await Ficha.findOrFail(id)
@@ -125,7 +124,6 @@ export default class FichaService {
       if (dados.produtos && dados.produtos.length > 0) {
         // Exclui os itens antigos e adiciona os novos
         await FichaItem.query().where('pratoId', id).delete()
-        console.log(dados)
         const fichaItens = dados.produtos.map((produto) => ({
           qtdUtilizado: produto.qtdUtilizado,
           valorUtilizado: produto.valorUtilizado,
