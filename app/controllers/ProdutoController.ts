@@ -19,7 +19,7 @@ export default class ProdutoController {
     const dados = await produtoCreateValidator.validate(request.all())
     const result = await this.produtoService.criarProduto(dados)
     return response.status(201).send({
-      status: true,
+      status: result?.status,
       message: result?.message,
       data: result?.data,
     })
@@ -28,7 +28,7 @@ export default class ProdutoController {
   public async mostrar({ params, response }: HttpContext) {
     const result = await this.produtoService.mostrarProduto(params.id)
     return response.status(200).send({
-      status: true,
+      status: result?.status,
       message: result?.message,
       data: result?.data,
     })

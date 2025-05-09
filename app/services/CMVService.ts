@@ -180,7 +180,7 @@ export default class CMVService {
       return {
         status: true,
         message: 'Registro cadastrado com sucesso',
-        data: cmv.toJSON(), // Retorna a ficha principal criada
+        data: cmv.toJSON(),
       }
     } catch (error) {
       return {
