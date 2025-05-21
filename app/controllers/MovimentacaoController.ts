@@ -4,6 +4,7 @@ import MovimentacaoService from '#services/MovimentacaoService'
 import ProdutoService from '#services/ProdutoService'
 import { movimentacaoValidator } from '#validators/MovimentacaoValidator'
 import type { HttpContext } from '@adonisjs/core/http'
+import { DateTime } from 'luxon'
 
 export default class MovimentacaoController {
   private movimentacaoService = new MovimentacaoService()
@@ -74,8 +75,12 @@ export default class MovimentacaoController {
         }
 
         if (saldo < 0) {
+          const dataFormatada = DateTime.fromJSDate(new Date(mov.data.toString())).toFormat(
+            'dd/LL/yyyy HH:mm'
+          )
+
           throw new Error(
-            `A movimentação ${mov.id} (${mov.movTipo === 1 ? 'entrada' : 'saída'} de ${mov.quantidade}) causaria saldo negativo após excluir a movimentação ${movimentacao.id}. Saldo atual simulado: ${saldo / fator}`
+            `A movimentação ${mov.id} (${mov.movTipo === 1 ? 'entrada' : 'saída'} de ${mov.quantidade}) em ${dataFormatada} causaria saldo negativo após excluir a movimentação ${movimentacao.id}. Saldo simulado: ${(saldo / fator).toFixed(3)}`
           )
         }
       }
