@@ -4,7 +4,6 @@ import MovimentacaoService from '#services/MovimentacaoService'
 import ProdutoService from '#services/ProdutoService'
 import { movimentacaoValidator } from '#validators/MovimentacaoValidator'
 import type { HttpContext } from '@adonisjs/core/http'
-import { DateTime } from 'luxon'
 
 export default class MovimentacaoController {
   private movimentacaoService = new MovimentacaoService()
@@ -55,10 +54,10 @@ export default class MovimentacaoController {
       const produto = await Produto.findOrFail(movimentacao.produtoId)
 
       // 1. Buscar todas as movimentações do mesmo produto após a movimentação atual
-      const posteriores = await Movimentacao.query()
-        .where('produto_id', movimentacao.produtoId)
-        .andWhere('data', '>', new Date(movimentacao.data.toString()).toISOString())
-        .orderBy('data', 'asc')
+      // const posteriores = await Movimentacao.query()
+      //   .where('produto_id', movimentacao.produtoId)
+      //   .andWhere('data', '>', new Date(movimentacao.data.toString()).toISOString())
+      //   .orderBy('data', 'asc')
 
       // 2. Calcular o saldo resultante se essa movimentação for removida
       let saldo = produto.quantidade
