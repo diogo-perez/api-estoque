@@ -50,45 +50,63 @@ export default class MovimentacaoController {
 
   public async excluirMovimentacao({ params }: HttpContext) {
     const id = params.id
-
     try {
       const movimentacao = await Movimentacao.findOrFail(id)
       const produto = await Produto.findOrFail(movimentacao.produtoId)
 
-      const fator = [1, 3].includes(produto.unidadeMedida) ? 1000 : 1
-
-      const todasMovs = await Movimentacao.query()
-        .where('produto_id', produto.id)
+      // 1. Buscar todas as movimentações do mesmo produto após a movimentação atual
+      const posteriores = await Movimentacao.query()
+        .where('produto_id', movimentacao.produtoId)
+        .andWhere('data', '>', new Date(movimentacao.data.toString()).toISOString())
         .orderBy('data', 'asc')
 
-      let saldo = 0
+      // 2. Calcular o saldo resultante se essa movimentação for removida
+      let saldo = produto.quantidade
+      const movTipo = Number(movimentacao.movTipo)
 
-      for (const mov of todasMovs) {
-        if (mov.id === movimentacao.id) continue // ignorar a movimentação que será excluída
-
-        const quantidade = mov.quantidade * fator
-
-        if (mov.movTipo === 1) {
-          saldo += quantidade
+      // Reverte o efeito da movimentação a ser excluída
+      if ([1, 3].includes(produto.unidadeMedida)) {
+        if (movTipo === 1) {
+          saldo -= movimentacao.quantidade * 1000
         } else {
-          saldo -= quantidade
+          saldo += movimentacao.quantidade * 1000
         }
-
-        if (saldo < 0) {
-          const dataFormatada = DateTime.fromJSDate(new Date(mov.data.toString())).toFormat(
-            'dd/LL/yyyy HH:mm'
-          )
-
-          throw new Error(
-            `A movimentação ${mov.id} (${mov.movTipo === 1 ? 'entrada' : 'saída'} de ${mov.quantidade}) em ${dataFormatada} causaria saldo negativo após excluir a movimentação ${movimentacao.id}. Saldo simulado: ${(saldo / fator).toFixed(3)}`
-          )
+      } else {
+        if (movTipo === 1) {
+          saldo -= movimentacao.quantidade
+        } else {
+          saldo += movimentacao.quantidade
         }
       }
 
+      // 3. Simula as movimentações posteriores para verificar se o saldo é suficiente
+      // for (const mov of posteriores) {
+      //   if ([1, 3].includes(produto.unidadeMedida)) {
+      //     if (mov.movTipo === 1) {
+      //       saldo += mov.quantidade * 1000
+      //     } else {
+      //       saldo -= mov.quantidade * 1000
+      //     }
+      //   } else {
+      //     if (mov.movTipo === 1) {
+      //       saldo += mov.quantidade
+      //     } else {
+      //       saldo -= mov.quantidade
+      //     }
+      //   }
+
+      //   if (saldo < 0) {
+      //     throw new Error(
+      //       'Não é possível excluir essa movimentação porque existem saídas posteriores que dependem dela. A exclusão resultaria em estoque negativo.'
+      //     )
+      //   }
+      // }
+
+      // 4. Aplica a exclusão e atualiza o estoque
       await movimentacao.delete()
 
       await this.produtoService.atualizarProduto(produto.id, {
-        quantidade: saldo / fator,
+        quantidade: saldo,
       })
 
       return {
